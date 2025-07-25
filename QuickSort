@@ -1,1 +1,46 @@
 
+public class QuickMain {
+
+	public static void main(String[] args) {
+		int[] arr = { 1, 6, 4, 5, 2 };// 1,2,4,5,6
+		quickSort(arr, 0, arr.length - 1);
+		System.out.print("Array after Sorting : ");
+		for(int i:arr) {
+			System.out.print(i+" ");
+		}
+
+	}
+
+	private static void quickSort(int[] arr, int low, int high) {
+		if(low<high) {
+		int partition = partition(arr,low,high); //finding index pos where pivot ele has to be in sorted array
+		quickSort(arr,low,partition-1);
+		quickSort(arr,partition+1,high);
+		}
+	}
+
+	private static int partition(int[] arr, int low, int high) {
+		int pivot = arr[high]; // asuming last ele as pivot
+		int i=low-1,j=low; // j loop till last before ele
+		while(j<high) {
+      // if ele in arr is less than or equal to pivot then we are swapping with i pointer
+      // we are trying to move ele less than pivot ele to the front of the ele
+      // two pointer approach, i-> tracks all ele less than pivot 
+      // all ele after i will be greater than pivot
+			if(arr[j]<=pivot){ 
+			i++;
+			int temp = arr[i];
+			arr[i]= arr[j];
+			arr[j] = temp;
+			}
+			j++;
+		}
+    // swapping i+1th index ele with pivot bcz it's the position of pivot ele in the array
+		int temp = arr[i+1];
+		arr[i+1] = pivot;
+		arr[high] =  temp;
+		return i+1;
+	}
+
+}
+
